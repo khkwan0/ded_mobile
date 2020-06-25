@@ -1,9 +1,12 @@
 import React, { useReducer } from 'react'
-import {View, Text, Dimensions, TouchableOpacity, ProgressViewIOSComponent, PickerIOSComponent} from 'react-native'
-import {WebView} from 'react-native-webview'
+import {View, Text, Dimensions, TouchableOpacity, ProgressViewIOSComponent, PickerIOSComponent, ColorPropType} from 'react-native'
+import HTML from 'react-native-render-html'
 import net from '../assets/net'
 import {useDispatch} from 'react-redux'
+import Swiper from 'react-native-swiper'
 import UpdateProgress from '../redux/actions/authActions'
+import Color from '../assets/styles/Color'
+
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
@@ -40,12 +43,30 @@ export default Lesson = props => {
     }
   }
 
-  console.log(state.lesson[state.slide])
+  const renderPagination = (index, total, context) => {
+    return(
+      <View style={{height:20, width:20}}>
+        <Text>{index+1}/{total}</Text>
+      </View>
+    )
+  }
+
   return(
-    <View style={{height: height, width: width}}>
+    <View>
+    <View style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+      <View style={{marginTop:30, height: height, width:'100%', backgroundColor:Color.dark(1), color:Color.secondary(1)}}>
       {state.lesson.length > 0 &&
-      <WebView style={{height:300, width:300}} originWhitelist={['*']} source={{html:state.lesson[state.slide].lesson}} renderError={()=>console.log('rendererr')} />
+      <Swiper showsPagination={false} bounces={true} loop={false} loadMinimal={true} loadMinimalSize={1} renderPagination={()=>renderPagination()}>
+        {state.lesson.map((lesson,idx)=> <View key={idx} style={{display:'flex', justifyContent:'center', alignItems:'center'}}><HTML
+          baseFontStyle={{color:Color.secondary(1), fontSize:24}}
+          containerStyle={{paddingLeft:20, paddingRight: 20,color: Color.secondary(1)}}
+          tagsStyles={{p: {color: Color.secondary(1)}},{h1:{color:Color.secondary(1)}}}
+          html={lesson.lesson} />
+        </View>)}
+      </Swiper>
       }
+      </View>
+    </View>
     </View>
   )
 }
