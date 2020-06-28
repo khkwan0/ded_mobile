@@ -1,24 +1,26 @@
 import React from 'react'
-import {View, ImageBackground, TouchableOpacity} from 'react-native'
+import {View, ImageBackground, TouchableOpacity, Text} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import styles from '../assets/styles/Styles'
+import Status from '../components/Status'
 
-export default MainMenu = props => {
+export default MainMenu = ({navigation}) => {
   return(
-    <View>
+    <View style={{height:'100%'}}>
       <View style={{flex: 1}}>
-        <TouchableOpacity onPress={()=>props.showCourse(true)}>
           <View style={[{flexGrow: 1}]}>
             <ImageBackground source={require('../assets/imgs/main_background.jpg')} style={{resizeMode:'cover', flex: 1}}>
-              <View style={[styles.pane, styles.lessonPane]}>
-                <Text style={[styles.paneText]}>Lesson</Text>
-              </View>
+              <TouchableOpacity onPress={()=>navigation.navigate("Course")}>
+                <View style={[styles.pane, styles.lessonPane]}>
+                  <Text style={[styles.paneText]}>Lesson</Text>
+                </View>
+              </TouchableOpacity>
             </ImageBackground>
           </View>
-        </TouchableOpacity>
         <View style={{flexGrow: 1}}>
           <ImageBackground source={require('../assets/imgs/main_background.jpg')} style={{resizeMode:'cover', flex: 1}}>
             <View style={[styles.pane, styles.statusPane]}>
               <Status />
-              <Text style={[styles.paneText]}>Status</Text>
             </View>
           </ImageBackground>
         </View>

@@ -10,7 +10,6 @@ const net = {
     let token = null
     try {
       const res = JSON.parse(atob(await localStorage.getItem(config.storage.key_prefix + 'user')))
-      console.log(res)
       token = res.token
     } catch(e) {
       console.log(e)

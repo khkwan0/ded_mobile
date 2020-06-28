@@ -16,6 +16,18 @@ const Styles = {
       color: Color.secondary
     }
   },
+  lessonPane: {
+    backgroundColor: Color.greenish(0.8),
+  },
+  pane: {
+    height: '100%'
+  },
+  statusPane: {
+    backgroundColor: Color.dark(0.8)
+  },
+  thirdPane: {
+    backgroundColor: Color.black(0.8)
+  }
 }
 
 export default Styles

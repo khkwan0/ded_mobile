@@ -14,7 +14,6 @@ export default (state = INITIAL_STATE, action) => {
         user: {...state.user, ...action.payload}
       }
     case TYPES.SET_LOGGEDIN_STATE:
-      console.log(action.payload)
       return {
         ...state,
         logged_in: action.payload

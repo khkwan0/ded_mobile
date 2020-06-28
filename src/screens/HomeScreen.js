@@ -1,10 +1,12 @@
 import React from 'react'
-import {View, Text, ImageBackground, StyleSheet} from 'react-native'
+import {View, Text, ImageBackground, StyleSheet, DrawerLayoutAndroid} from 'react-native'
 import Styles from '../assets/styles/Styles'
 import Color from '../assets/styles/Color'
 import Course from './Course'
 import Graduate from './Graduate'
 import MainMenu from './MainMenu'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import { NavigationContainer } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   pane: {
@@ -27,6 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.black(0.95)
   }
 })
+const Drawer = createDrawerNavigator()
 
 export default HomeScreen = props => {
 
@@ -48,16 +51,12 @@ export default HomeScreen = props => {
   }
 
   return(
-    <View>
-      {showCourse &&
-        <Course />
-      }
-      {showGraduate &&
-        <Graduate />
-      }
-      {!showGraduate && !showCourse &&
-        <MainMenu showCourse={showCourse} showGraduate={showGraduate} />
-      }
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="MainMenu" edgeWidth={0}>
+        <Drawer.Screen name="MainMenu" component={MainMenu} />
+        <Drawer.Screen name="Course" component={Course} />
+        <Drawer.Screen name="Graduate" component={Graduate} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   )
 }

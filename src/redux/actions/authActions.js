@@ -55,7 +55,6 @@ export const SetLoggedIn = (flag) => {
 
 export const SetUser = (user) => {
   return async dispatch => {
-    console.log(user)
     if (typeof user.token !== 'undefined') {
       try {
         const res = await net.PostToServer('/user', {user:user})
@@ -72,7 +71,7 @@ export const SetUser = (user) => {
 
 export const UpdateUserProgress = (progress, token) => {
   return async dispatch => {
-    if (token) {
+    if (typeof token !== 'undefined' && token) {
       try {
         const res = await net.PostToServer('/progress', {progress: progress, token: token})
         dispatch({
@@ -86,11 +85,10 @@ export const UpdateUserProgress = (progress, token) => {
   }
 }
 
-export const verifyToken = () => {
+export const VerifyToken = () => {
   return async dispatch => {
     try {
-      const user = JSON.parse(atob(localStorage.getItem(config.storage.key_prefix + 'user')))
-        console.log(user)
+      const user = JSON.parse(atob(await localStorage.getItem(config.storage.key_prefix + 'user')))
       if (typeof user.email !== 'undefined' && typeof user.token !== 'undefined') {
         const res = await net.PostToServer('/verify', {email: user.email, token: user.token})
         if (res.err === 0) {

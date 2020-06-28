@@ -79,6 +79,8 @@ target 'caldrivers' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
   target 'caldriversTests' do
     inherit! :complete
     # Pods for testing
