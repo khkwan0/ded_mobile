@@ -27,6 +27,14 @@ const Styles = {
   },
   thirdPane: {
     backgroundColor: Color.black(0.8)
+  },
+  h2: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  },
+  h3: {
+    fontSize: 19,
+    fontWeight: 'bold'
   }
 }
 

@@ -26,13 +26,22 @@ export default Course = ({navigation}) => {
     setState({showLesson: false, showQuiz: true})
   }
 
+  const advanceUnit = () => {
+    const unit = state.unit + 1
+    if (unit < 10) {
+      setState({showQuiz: false, unit:unit, showLesson: true})
+    } else {
+
+    }
+  }
+
   return(
     <View>
       {state.showLesson &&
         <Lesson unit={state.unit} navigation={navigation} showQuiz={showQuiz} />
       }
       {state.showQuiz &&
-        <Quiz unit={state.unit} />
+        <Quiz unit={state.unit} advanceUnit={advanceUnit}/>
       }
     </View>
   )

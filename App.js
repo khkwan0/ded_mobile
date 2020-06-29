@@ -1,3 +1,4 @@
+import {Provider as PaperProvider} from 'react-native-paper'
 import React from 'react'
 import Main from './src/Main'
 import {createStore, applyMiddleware} from 'redux'
@@ -10,7 +11,9 @@ export default App = () => {
   const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
   return(
     <Provider store={store}>
-      <Main />
+      <PaperProvider>
+        <Main />
+      </PaperProvider>
     </Provider>
   )
 }
